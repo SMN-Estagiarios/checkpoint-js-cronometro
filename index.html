@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ignite Timer</title>
+        <link rel="stylesheet" href="./css/uikit.css" />
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body class="uk-padding uk-padding-remove-top uk-padding-remove-bottom">
+        <header class="uk-flex uk-flex-between uk-flex-middle uk-width-1-1">
+            <a href="#">
+                <img src="./assets/logo.svg" alt="Logo Ignite" />
+            </a>
+            <div>
+                <a href="#">
+                    <img src="./assets/relogio-ativado.svg" alt="Icone do relogio" />
+                </a>
+                <a class="uk-margin-large-left" href="./historico.html">
+                    <img src="./assets/lista-desativada.svg" alt="Icone da lista para o histórico" />
+                </a>
+            </div>
+        </header>
+        <main class="uk-width-1-2">
+            <div class="uk-flex uk-flex-between" id="informacoes-projeto">
+                Vou trabalhar em
+                <div class="uk-width-expand input-projeto" id="input-nome-projeto">
+                    <input type="text" class="uk-text-center " name="nome-projeto" id="nome-projeto" placeholder="Dê um nome para o seu projeto" />
+                </div>
+                durante
+                <div class="uk-flex uk-flex-between uk-width-auto input-projeto" id="input-duracao-projeto">
+                    <img src="./assets/menos.svg" alt="Icone de subtrair minutos do temporizador" />
+                    <input type="text" class="uk-text-center" name="duracao-projeto" id="duracao-projeto" placeholder="00" />
+                    <img src="./assets/mais.svg" alt="Icone de adicionar minutos do temporizador" />
+                </div>
+                minutos.
+            </div>
+            <div class="uk-text-center uk-margin-large-top uk-margin-large-bottom container-temporizador">
+                <div>
+                    <div class="uk-card uk-card-small uk-card-default uk-border-rounded temporizador" id="minuto-decimal">0</div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-small uk-card-default uk-border-rounded temporizador" id="minuto-unitario">0</div>
+                </div>
+                <div>
+                    <div class="uk-padding-remove temporizador" id="separador">:</div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-small uk-card-default uk-border-rounded temporizador" id="segundo-decimal">0</div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-small uk-card-default uk-border-rounded temporizador" id="segundo-unitario">0</div>
+                </div>
+            </div>
+            <button class="uk-flex uk-flex-middle uk-flex-center uk-width-1-1 uk-border-rounded">
+                <img src="./assets/play.svg" alt="Icone de play para iniciar o temporizador" />
+                <p class="uk-margin-small-left">Começar</p>
+            </button>
+        </main>
+    </body>
+    <script src="./js/uikit.js"></script>
+    <script src=""></script>
+</html>

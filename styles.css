@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --cor-fonte-branca: #E1E1E6;
+  --cor-fonte-verde: #00875F;
+  --cor-fonte-placeholder: #7C7C8A;
+  --cor-bg-temporizador: #29292E;
+  --cor-bg-body: #202024;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--cor-bg-body);
+  font-family: "Roboto Mono", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: var(--cor-fonte-branca);
+  height: 100vh;
+
+  & header {
+    justify-self: center;
+    height: 20%;
+  }
+
+  & main {
+    height: 80%;
+    justify-self: center;
+
+    & #informacoes-projeto {
+      font-weight: 700;
+      font-size: 1.125rem;
+
+      & .input-projeto {
+        color: var(--cor-fonte-branca);
+        padding-bottom: .625rem;
+        border-bottom: .125rem solid #7C7C8A;
+
+        & input {
+          font-weight: 700;
+          font-size: 1.125rem;
+          background-color: inherit;
+          border: 0 none;
+          outline: 0;
+          line-height: 1.125rem;
+        }
+      }
+
+      & #input-nome-projeto {
+        padding-inline: .5rem;
+        margin-inline: 1rem;
+
+        & input {
+          color: var(--cor-fonte-branca);
+          width: 100%;
+        }
+      }
+
+      & #input-duracao-projeto {
+        padding-inline: .2rem;
+        margin-inline: 1rem;
+
+        & input {
+          color: var(--cor-fonte-branca);
+          width: 1.563rem;
+        }
+
+        & img {
+          width: .75rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    & .container-temporizador {
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr 2fr 2fr;
+      column-gap: 1rem;
+
+      & .temporizador {
+        color: var(--cor-fonte-branca);
+        background-color: var(--cor-bg-temporizador);
+        font-size: 10rem;
+        font-weight: 700;
+        line-height: 12.375rem;
+      }
+
+      & #separador {
+        background-color: inherit;
+        color: var(--cor-fonte-verde);
+      }
+    }
+
+    & button {
+      color: var(--cor-fonte-branca);
+      background-color: var(--cor-fonte-verde);
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
