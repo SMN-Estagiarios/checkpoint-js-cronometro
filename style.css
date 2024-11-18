@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Vazirmatn:wght@100..900&display=swap');
+
+:root {
+    --cor-preto-background: #121214;
+    --cor-cinza-background: #202024;
+    --cor-cinza-letra-input: #7c7c8a;
+    --cor-cinza-card: #29292e;
+    --cor-verde: #00875F;
+    --cor-vermelha: #ab222e;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 'Roboto', monospace;
+}
+
+body {
+    background-color: var(--cor-preto-background);
+    font-size: 1.3815vw;
+    min-height: 100vh;
+}
+
+.pagina-principal {
+    background-color: var(--cor-cinza-background);
+    height: 95%;
+    width: 80%;
+}
+
+.cronometro{
+    color: white;
+}
+
+.input-nome-projeto,
+.input-tempo-projeto,
+.input-nome-projeto::placeholder,
+.input-tempo-projeto::placeholder,
+.input-nome-projeto:focus,
+.input-tempo-projeto:focus {
+    outline: none;
+    background-color: var(--cor-cinza-background);
+    color: var(--cor-cinza-letra-input);
+    border: none;
+    padding-bottom: .1852vw;
+    font-size: 1.2vw;
+    border-bottom: .200vw solid var(--cor-cinza-letra-input);
+    font-weight: 700;
+}
+
+.input-nome-projeto {
+    width: 17.9vw;
+    margin-inline: 0.7vw;
+  
+}
+
+.input-tempo-projeto::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.input-tempo-projeto {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    width: 5vw;
+}
+.container-numero-cronometro{
+}
+.header {
+    & img {
+        height: 2.7037vw;
+        width: 2.7037vw;
+    }
+}
+.card {
+    margin-inline: .663vw;
+    background-color: var(--cor-cinza-card);
+    font-size: 14.8148vw;
+    font-family: "Roboto Mono", monospace;
+    line-height: 17vw;
+}
+.card-dois-pontos{
+    color: var(--cor-verde);
+    background-color: var(--cor-cinza-background);
+    display: inline-block;
+    width: 5.6296vw;
+    font-size: 14.8148vw;
+    line-height: 14vw;
+}
+
+.botao-cronometro {
+
+    & button{
+        background-color: var(--cor-verde);
+        width: 45.5556vw;
+    }
+
+    & #texto-botao{
+        margin-left: 4px;
+    }
+}
