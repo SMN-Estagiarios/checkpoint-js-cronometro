@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 :root {
   --cor-fonte-branca: #E1E1E6;
@@ -6,84 +7,67 @@
   --cor-fonte-placeholder: #7C7C8A;
   --cor-bg-temporizador: #29292E;
   --cor-bg-body: #202024;
+  --cor-bg-titulo-tabela: #323238;
+  --cor-scroll: #505059;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: var(--cor-bg-body);
-  font-family: "Roboto Mono", serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
   color: var(--cor-fonte-branca);
-  height: 100vh;
-
-  & header {
-    justify-self: center;
-    height: 20%;
-  }
 
   & main {
-    height: 80%;
-    justify-self: center;
+    & h2 {
+      color: var(--cor-fonte-branca);
+    }
 
     & #informacoes-projeto {
       font-weight: 700;
-      font-size: 1.125rem;
+      font-size: .94vw;
 
       & .input-projeto {
         color: var(--cor-fonte-branca);
-        padding-bottom: .625rem;
-        border-bottom: .125rem solid #7C7C8A;
 
         & input {
           font-weight: 700;
-          font-size: 1.125rem;
+          font-size: .94vw;
           background-color: inherit;
           border: 0 none;
           outline: 0;
-          line-height: 1.125rem;
+          line-height: .94vw;
+        }
+
+        & img {
+          width: .63vw;
+          cursor: pointer;
         }
       }
 
       & #input-nome-projeto {
-        padding-inline: .5rem;
-        margin-inline: 1rem;
-
         & input {
           color: var(--cor-fonte-branca);
-          width: 100%;
         }
       }
 
       & #input-duracao-projeto {
-        padding-inline: .2rem;
-        margin-inline: 1rem;
+        min-width: 4.17vw;
 
         & input {
           color: var(--cor-fonte-branca);
-          width: 1.563rem;
-        }
-
-        & img {
-          width: .75rem;
-          cursor: pointer;
+          width: 1.04vw;
         }
       }
     }
 
     & .container-temporizador {
-      display: grid;
-      grid-template-columns: 2fr 2fr 1fr 2fr 2fr;
-      column-gap: 1rem;
-
       & .temporizador {
         color: var(--cor-fonte-branca);
         background-color: var(--cor-bg-temporizador);
-        font-size: 10rem;
+        font-size: 8.33vw;
+        font-family: "Roboto Mono", serif;
         font-weight: 700;
-        line-height: 12.375rem;
+        line-height: 10.31vw;
       }
 
       & #separador {
@@ -95,9 +79,34 @@ body {
     & button {
       color: var(--cor-fonte-branca);
       background-color: var(--cor-fonte-verde);
-      font-size: 1rem;
+      opacity: 0.7;
+      font-size: .83vw;
       border: none;
       cursor: pointer;
+    }
+
+    & .container-tabela {
+      font-size: 1.04vw;
+      line-height: 1.15vw;
+      color: var(--cor-fonte-branca);
+
+      & .titulo-tabela {
+        padding: 1.41vw;
+        background-color: var(--cor-bg-titulo-tabela);
+        font-weight: 700;
+      }
+
+      & .tarefas {
+        scrollbar-width: thin;
+        scrollbar-color: var(--cor-scroll) var(--cor-bg-body);
+        max-height: 50vh;
+
+        & .linha-tabela {
+          padding: 1.41vw;
+          background-color: var(--cor-bg-temporizador);
+          font-weight: 400;
+        }
+      }
     }
   }
 }

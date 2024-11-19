@@ -1,35 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ignite Timer</title>
-    <link rel="stylesheet" href="./css/uikit.css">
-    <link rel="stylesheet" href="./styles.css">
-</head>
-<body class="uk-height-viewport">
-    <div class="uk-link-reset">
-        <header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ignite Timer - Histórico</title>
+        <link rel="stylesheet" href="./css/uikit.css" />
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body uk-height-viewport class="uk-flex uk-flex-column uk-flex-middle uk-padding-large uk-link-reset">
+        <nav class="uk-flex uk-flex-between uk-flex-middle uk-width-1-1">
             <a href="./index.html">
-                <img src="./assets/logo.svg" alt="Logo Ignite">
+                <img src="./assets/logo.svg" alt="Logo Ignite" />
             </a>
             <div>
                 <a href="./index.html">
-                    <img src="./assets/relogio-desativado.svg" alt="Icone do relogio">
+                    <img src="./assets/relogio-desativado.svg" alt="Icone do relogio" />
                 </a>
-                <a href="#">
-                    <img src="./assets/lista-ativada.svg" alt="Icone da lista para o histórico">
+                <a class="uk-margin-medium-left" href="#">
+                    <img src="./assets/lista-ativada.svg" alt="Icone da lista para o histórico" />
                 </a>
             </div>
-        </header>
-        <main>
-            <p>Meu histórico</p>
-            <table>
-
-            </table>
+        </nav>
+        <main class="uk-margin-medium-top uk-width-4-5">
+            <h2 class="uk-text-left">Meu histórico</h2>
+            <div class="uk-grid-row-collapse uk-border-rounded container-tabela" uk-grid>
+                <div class="uk-width-1-1">
+                    <div class="uk-grid-collapse titulo-tabela" uk-grid>
+                        <div class="uk-width-2-5">
+                            <div>Tarefa</div>
+                        </div>
+                        <div class="uk-width-1-5">
+                            <div>Duração</div>
+                        </div>
+                        <div class="uk-width-1-5">
+                            <div>Início</div>
+                        </div>
+                        <div class="uk-width-1-5">
+                            <div>Status</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-overflow-auto uk-width-1-1 tarefas">
+                    <!-- <div class="uk-margin-small-top">
+                        <div class="uk-grid-collapse linha-tabela" uk-grid>
+                            <div class="uk-width-2-5">
+                                <div>Tarefa</div>
+                            </div>
+                            <div class="uk-width-1-5">
+                                <div>Duração</div>
+                            </div>
+                            <div class="uk-width-1-5">
+                                <div>Início</div>
+                            </div>
+                            <div class="uk-width-1-5">
+                                <div>Status</div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
         </main>
-    </div>
-    <script src="./js/uikit.js"></script>
-    <script src=""></script>
-</body>
+        <script src="./js/uikit.js"></script>
+        <script src=""></script>
+    </body>
 </html>
