@@ -30,7 +30,7 @@ body {
     width: 80%;
 }
 
-.cronometro{
+.conteudo-principal{
     color: white;
 }
 
@@ -47,7 +47,7 @@ body {
     padding-bottom: .1852vw;
     font-size: 1.2vw;
     border-bottom: .200vw solid var(--cor-cinza-letra-input);
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .input-nome-projeto {
@@ -65,12 +65,15 @@ body {
     appearance: textfield;
     width: 5vw;
 }
-.container-numero-cronometro{
-}
+
 .header {
     & img {
-        height: 2.7037vw;
-        width: 2.7037vw;
+        height: 1.9037vw;
+        width: 1.9037vw;
+        margin-inline: .9259vw;
+    }
+    & a {
+        cursor: pointer;
     }
 }
 .card {
@@ -99,4 +102,20 @@ body {
     & #texto-botao{
         margin-left: 4px;
     }
+}
+
+.esconder {
+    display: none;
+}
+
+.header-tabela-resultados {
+    background-color: #323238;
+    color: white;
+    font-weight: 600;
+    font-size: 1.4815vw;
+}
+
+.body-tabela-resultados {
+    background-color: #29292e;
+    color: #c4c4cc;
 }

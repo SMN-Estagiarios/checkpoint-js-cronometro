@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
+    <title>Cronometro</title>
+</head>
+
+<body class="uk-flex uk-flex-center uk-flex-middle">
+    <div class="pagina-principal uk-container uk-container-xlarge uk-padding">
+        <header class="header uk-flex uk-flex-between uk-padding">
+            <a href="./index.html" class="logo"><img src="./assets/logo.svg" alt="logo-cronometro"></a>
+            <nav class="navegacao uk-flex">
+                <a id="item-navegacao-temporizador" href="./cronometro.html" >
+                    <img src="./assets/cronometro-desativado.svg" id="icon-temporizador" alt="icone navegação timer">
+                </a>
+                <a id="item-navegacao-historico">
+                    <img src="./assets/historico.svg" id="historico" alt=" icone navegação histórico">
+                </a>
+            </nav>
+        </header>
+        <main class="conteudo-principal uk-text-center" id="conteudo-principal">
+            <p class="uk-text uk-margin-large">
+                vou trabalhar em
+                <input class="input-nome-projeto uk-text-center" type="text"
+                    placeholder="Dê um nome para o seu projeto" id="nome-projeto"> durante
+                <input class="input-tempo-projeto uk-text-center" type="number" placeholder="- 00 +" id="tempo-projeto"> minutos
+            </p>
+            <div 
+                class="container-numero-cronometro uk-container uk-width-1-1 uk-flex uk-flex-center uk-text-bold">
+                <span class="card uk-card  uk-border-rounded">
+                    0
+                </span>
+                <span class="card uk-card  uk-border-rounded">
+                    0
+                </span>
+                <span class="card-dois-pontos">:</span>
+                <span class="card uk-card  uk-border-rounded">
+                    0
+                </span> 
+                <span class="card uk-card  uk-border-rounded uk-box-shadow-small">
+                    0
+                </span>
+            </div>
+            <div
+                class="botao-cronometro uk-width-1-1 uk-flex uk-flex-center uk-margin uk-padding-small uk-padding-remove-horizontal">
+                <button class="uk-button uk-button-large uk-border-rounded uk-text-bold">
+                    <img src="./assets/iniciar-cronometro.svg" id="icon-botao" alt="botão iniciar cronometro">
+                    <span id="texto-botao">Começar</span>
+                </button>
+            </div>
+        </main>
+        <script src="./script.js"></script>
+</body>
+
+</html>

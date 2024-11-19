@@ -6,40 +6,106 @@ document.addEventListener("DOMContentLoaded", () => {
     const iconTemp = document.getElementById('icon-temporizador');
     const projectName = document.getElementById('nome-projeto');
     const projectTimer = document.getElementById('tempo-projeto');
-    const historyContainer = document.getElementById('cronometro'); // Contêiner para exibir o histórico
-    const history = document.getElementById('historico')
+    const mainContent = document.getElementById('conteudo-principal');
+    const history = document.getElementById('historico');
+    const ancorIconTemporizador = document.getElementById('item-navegacao-temporizador');
+    const ancorIconLogo = document.getElementById('ancor-logo');
+    const temporizador = document.getElementById('cronometro');
+    const tabelaGrid = document.getElementById('tabela-grid')
 
-    let timerInterval = null;
+    let timerInterval = 0;
     let isRunning = false;
     let totalSeconds = 0;
 
-    const iniciarCronometro = () => {
-        if (isNaN(projectTimer.value) || !projectName.value.trim()) {
-            alert("Parâmetros inválidos");
-            return;
+    const toggleVisibility = (showCronometro) => {
+        if (showCronometro) {
+            temporizador.classList.remove("esconder");
+            tabelaGrid.classList.add("esconder");
+        } else {
+            temporizador.classList.add("esconder");
+            tabelaGrid.classList.remove("esconder");
         }
+    };
+
+    const iniciarOuPausarCronometro = () => {
+        const timeInputInSeconds = projectTimer.value * 60;
 
         startButton.style.backgroundColor = "var(--cor-vermelha)";
         iconButton.src = "./assets/interromper-cronometro.svg";
-        textButton.innerText = "Interromper";
+        textButton.innerText = "interromper";
         iconTemp.src = "./assets/cronometro-ativado.svg";
 
-        if (!isRunning) {
+        if (timerInterval === 0) {
             isRunning = true;
+
             timerInterval = setInterval(() => {
                 totalSeconds++;
                 updateTimerDisplay(totalSeconds);
+
+                if (totalSeconds >= timeInputInSeconds) {
+                    alert(`O tempo de ${projectTimer.value} minuto(s) foi atingido!`);
+                    interromperCronometro();
+                }
+                salvarEstadoCronometro();
             }, 1000);
+        } else {
+            pausarCronometro();
+        }
+    };
+
+    const salvarEstadoCronometro = () => {
+        const timeInputInSeconds = projectTimer.value * 60;
+        const cronometroState = {
+            projectName: projectName.value,
+            totalSeconds: totalSeconds,
+            projectTimerInSeconds: timeInputInSeconds,
+            projectTimerInminutes: projectTimer.value,
+            isRunning: isRunning
+        };
+        localStorage.setItem("cronometroState", JSON.stringify(cronometroState));
+    };
+
+    const recuperarEstadoCronometro = () => {
+        
+         startButton.style.backgroundColor = "var(--cor-vermelha)";
+        iconButton.src = "./assets/interromper-cronometro.svg";
+        textButton.innerText = "interromper";
+        iconTemp.src = "./assets/cronometro-ativado.svg"; 
+       
+        const savedState = JSON.parse(localStorage.getItem("cronometroState"));
+        if (savedState) {
+            projectName.value = savedState.projectName || '';
+            totalSeconds = savedState.totalSeconds || 0;
+            isRunning = savedState.isRunning || false;
+            projectTimer.value = savedState.projectTimerInminutes;
+            const timeInputInSeconds = savedState.projectTimerInSeconds
+
+            updateTimerDisplay(totalSeconds);
+
+            if (isRunning) {
+                timerInterval = setInterval(() => {
+                    totalSeconds++;
+                    updateTimerDisplay(totalSeconds);
+        
+                    if (totalSeconds >= timeInputInSeconds) {
+                        alert(`O tempo de ${projectTimer.value} minuto(s) foi atingido!`);
+                        interromperCronometro();
+                    }
+                }, 1000);
+            }
         }
     };
 
     const interromperCronometro = () => {
+       
         salvarDadosCronometro();
 
         startButton.style.backgroundColor = "var(--cor-verde)";
         iconButton.src = "./assets/iniciar-cronometro.svg";
         textButton.innerText = "Começar";
         iconTemp.src = "./assets/cronometro-desativado.svg";
+        projectName.value = ""
+        projectTimer.value = '0'
 
         cards[0].textContent = "0";
         cards[1].textContent = "0";
@@ -50,18 +116,21 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(timerInterval);
     };
 
-    const toggleCronometro = () => {
-        if (isRunning) {
-            interromperCronometro();
-        } else {
-            iniciarCronometro();
+    const pausarCronometro = () => {
+        
+        clearInterval(timerInterval)
+        timerInterval = 0
+        startButton.style.backgroundColor = "var(--cor-verde)";
+        iconButton.src = "./assets/iniciar-cronometro.svg";
+        textButton.innerText = "Começar";
+        iconTemp.src = "./assets/cronometro-desativado.svg";
+        isRunning = false;
         }
-    };
-
+    
     const updateTimerDisplay = (totalSeconds) => {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
-        
+
         const minutesArray = String(minutes).padStart(2, "0").split("");
         const secondsArray = String(seconds).padStart(2, "0").split("");
 
@@ -84,20 +153,48 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const renderizarHistorico = () => {
+        salvarEstadoCronometro();
+        history.src = "./assets/historico-ativado.svg";
+        iconTemp.src = "./assets/cronometro-desativado.svg";
+        temporizador.classList.add('esconder')
+        tabelaGrid.classList.remove('esconder')
+
         const storedData = JSON.parse(localStorage.getItem("cronometroData")) || [];
-        historyContainer.innerHTML = "";
 
         storedData.forEach((data) => {
-            const historyItem = document.createElement("div");
-            historyItem.classList.add("historico-item");
-            historyItem.innerHTML = `
-                <p><strong>Projeto:</strong> ${data.projectName}</p>
-                <p><strong>Duração:</strong> ${data.duration}</p>
-                <p><strong>Finalizado em:</strong> ${data.timestamp}</p>
+            const historicoContainer = document.getElementById("body-resultado");
+            const historyItem = document.createElement('div');
+            historicoContainer.className = 'uk-grid-collapse uk-flex uk-border-rounded header-tabela-resultados body-resultado';
+            historyItem.setAttribute('uk-grid', '')
+            historicoContainer.innerHTML = `
+                <div class="uk-width-1-2 uk uk-grid-column-small">
+                    <div class="uk-padding">${data.projectName}</div>
+                </div>
+                <div class="uk-width-1-3 uk-grid-column-small">
+                    <div class="uk-padding">${data.duration}</div>
+                </div>
+                <div class="uk-width-1-3 uk-grid-column-small"> 
+                    <div class="uk-padding">Inicio</div>
+                </div>
+                <div class="uk-width-1-3 uk-grid-column-small">
+                    <div class="uk-padding">status</div>
+                </div>
             `;
-            historyContainer.appendChild(historyItem);
+            historicoContainer.appendChild(historyItem);
         });
     };
+
+    const mudarParaTemporizador = () =>{  
+        const conteudo = getElementById('conteudo-principal')
+
+            ancorIconTemporizador.onclick = function (e) {
+                e.preventDefault()
+            fetch(link.href)
+                .then(resp => resp.text())
+                .then(html => conteudo.innerHTML = html)
+                recuperarEstadoCronometro();
+        }
+    }
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -105,6 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
     };
 
-    startButton.addEventListener('click', toggleCronometro);
-    history.addEventListener('click', renderizarHistorico)
+    startButton.addEventListener('click', iniciarOuPausarCronometro);
+    history.addEventListener('click', renderizarHistorico);
+    ancorIconTemporizador.addEventListener('click', mudarParaTemporizador);
+    ancorIconLogo.addEventListener('click', recuperarEstadoCronometro)
+ 
 });
