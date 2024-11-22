@@ -7,6 +7,7 @@
   --cor-fonte-placeholder: #7C7C8A;
   --cor-bg-temporizador: #29292E;
   --cor-bg-body: #202024;
+  --cor-bg-vermelho: #AB222E;
   --cor-bg-titulo-tabela: #323238;
   --cor-scroll: #505059;
 }
@@ -18,86 +19,102 @@ body {
   color: var(--cor-fonte-branca);
 
   & main {
-    & h2 {
-      color: var(--cor-fonte-branca);
-    }
+    & #container-registrar-tarefa {
+      & #informacoes-tarefa {
+        font-weight: 700;
+        font-size: .94vw;
 
-    & #informacoes-projeto {
-      font-weight: 700;
-      font-size: .94vw;
-
-      & .input-projeto {
-        color: var(--cor-fonte-branca);
-
-        & input {
-          font-weight: 700;
-          font-size: .94vw;
-          background-color: inherit;
-          border: 0 none;
-          outline: 0;
-          line-height: .94vw;
+        & .input-tarefa {
           color: var(--cor-fonte-branca);
+
+          & input {
+            font-weight: 700;
+            font-size: .94vw;
+            background-color: inherit;
+            border: 0 none;
+            outline: 0;
+            line-height: .94vw;
+            color: var(--cor-fonte-branca);
+          }
+
+          & img {
+            width: .63vw;
+            cursor: pointer;
+          }
         }
 
-        & img {
-          width: .63vw;
-          cursor: pointer;
+        & #input-duracao-tarefa {
+          min-width: 4.17vw;
+
+          & input {
+            width: 1.04vw;
+          }
         }
       }
 
-      & #input-duracao-projeto {
-        min-width: 4.17vw;
-
-        & input {
-          width: 1.04vw;
-        }
-      }
-    }
-
-    & .container-temporizador {
-      & .temporizador {
-        color: var(--cor-fonte-branca);
-        background-color: var(--cor-bg-temporizador);
-        font-size: 8.33vw;
-        font-family: "Roboto Mono", serif;
-        font-weight: 700;
-        line-height: 10.31vw;
-      }
-
-      & #separador {
-        background-color: inherit;
-        color: var(--cor-fonte-verde);
-      }
-    }
-
-    & button {
-      color: var(--cor-fonte-branca);
-      background-color: var(--cor-fonte-verde);
-      opacity: 0.7;
-      font-size: .83vw;
-      border: none;
-    }
-
-    & .container-tabela {
-      font-size: 1.04vw;
-      line-height: 1.15vw;
-      color: var(--cor-fonte-branca);
-
-      & .titulo-tabela {
-        padding: 1.41vw;
-        background-color: var(--cor-bg-titulo-tabela);
-        font-weight: 700;
-      }
-
-      & .tarefas {
-        scrollbar-width: thin;
-        scrollbar-color: var(--cor-scroll) var(--cor-bg-body);
-        max-height: 50vh;
-
-        & .linha-tabela {
-          padding: 1.41vw;
+      & .container-temporizador {
+        & .temporizador {
+          color: var(--cor-fonte-branca);
           background-color: var(--cor-bg-temporizador);
-          font-weight: 400;
+          font-size: 8.33vw;
+          font-family: "Roboto Mono", serif;
+          font-weight: 700;
+          line-height: 10.31vw;
+        }
+
+        & #separador {
+          background-color: inherit;
+          color: var(--cor-fonte-verde);
+        }
+      }
+
+      & button {
+        color: var(--cor-fonte-branca);
+        opacity: 0.7;
+        font-size: .83vw;
+        border: none;
+      }
+      
+      & #botao-temporizador-comecar {
+        background-color: var(--cor-fonte-verde);
+      }
+
+      & #botao-temporizador-interromper {
+        display: none;
+        background-color: var(--cor-bg-vermelho);
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+
+    & #container-historico {
+      display: none;
+
+      & h2 {
+        color: var(--cor-fonte-branca);
+      }
+
+      & .container-tabela {
+        font-size: 1.04vw;
+        line-height: 1.15vw;
+        color: var(--cor-fonte-branca);
+
+        & .titulo-tabela {
+          padding: 1.41vw;
+          background-color: var(--cor-bg-titulo-tabela);
+          font-weight: 700;
+        }
+
+        & .tarefas {
+          scrollbar-width: thin;
+          scrollbar-color: var(--cor-scroll) var(--cor-bg-body);
+          max-height: 50vh;
+
+          & .linha-tabela {
+            padding: 1.41vw;
+            background-color: var(--cor-bg-temporizador);
+            font-weight: 400;
+          }
         }
       }
     }
