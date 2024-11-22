@@ -30,7 +30,7 @@ body {
     width: 80%;
 }
 
-.conteudo-principal{
+.conteudo-principal {
     color: white;
 }
 
@@ -53,7 +53,7 @@ body {
 .input-nome-projeto {
     width: 17.9vw;
     margin-inline: 0.7vw;
-  
+
 }
 
 .input-tempo-projeto::-webkit-inner-spin-button {
@@ -72,10 +72,12 @@ body {
         width: 1.9037vw;
         margin-inline: .9259vw;
     }
+
     & a {
         cursor: pointer;
     }
 }
+
 .card {
     margin-inline: .663vw;
     background-color: var(--cor-cinza-card);
@@ -83,7 +85,8 @@ body {
     font-family: "Roboto Mono", monospace;
     line-height: 17vw;
 }
-.card-dois-pontos{
+
+.card-dois-pontos {
     color: var(--cor-verde);
     background-color: var(--cor-cinza-background);
     display: inline-block;
@@ -94,12 +97,12 @@ body {
 
 .botao-cronometro {
 
-    & button{
+    & button {
         background-color: var(--cor-verde);
         width: 45.5556vw;
     }
 
-    & #texto-botao{
+    & #texto-botao {
         margin-left: 4px;
     }
 }
@@ -118,11 +121,12 @@ body {
 .body-tabela-resultados {
     background-color: #29292e;
     color: #c4c4cc;
-    
+
     & div {
         margin-block: 10px;
     }
 }
-.tabela-titulo{
+
+.tabela-titulo {
     color: aliceblue;
 }
