@@ -17,16 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let isRunning = false;
     let totalSeconds = 0;
 
-    const toggleVisibility = (showCronometro) => {
-        if (showCronometro) {
-            temporizador.classList.remove("esconder");
-            tabelaGrid.classList.add("esconder");
-        } else {
-            temporizador.classList.add("esconder");
-            tabelaGrid.classList.remove("esconder");
-        }
-    };
-
     const iniciarOuPausarCronometro = () => {
         const timeInputInSeconds = projectTimer.value * 60;
 
@@ -50,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1000);
         } else {
             pausarCronometro();
+            interromperCronometro();
         }
     };
 
@@ -144,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cronometroData = {
             projectName: projectName.value,
             duration: formatTime(totalSeconds),
-            timestamp: new Date().toLocaleString()
+            startTime: new Date().toLocaleString()
         };
 
         const storedData = JSON.parse(localStorage.getItem("cronometroData")) || [];
@@ -163,24 +154,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         storedData.forEach((data) => {
             const historicoContainer = document.getElementById("body-resultado");
-            const historyItem = document.createElement('div');
-            historicoContainer.className = 'uk-grid-collapse uk-flex uk-border-rounded header-tabela-resultados body-resultado';
-            historyItem.setAttribute('uk-grid', '')
-            historicoContainer.innerHTML = `
-                <div class="uk-width-1-2 uk uk-grid-column-small">
-                    <div class="uk-padding">${data.projectName}</div>
-                </div>
-                <div class="uk-width-1-3 uk-grid-column-small">
-                    <div class="uk-padding">${data.duration}</div>
-                </div>
-                <div class="uk-width-1-3 uk-grid-column-small"> 
-                    <div class="uk-padding">Inicio</div>
-                </div>
-                <div class="uk-width-1-3 uk-grid-column-small">
-                    <div class="uk-padding">status</div>
+            historicoContainer.innerHTML += `
+                <div>
+                    <div class="uk-child-width-1-3 uk-text-center uk-flex" uk-grid>
+                        <div>
+                            <div class="uk-card padding">${data.projectName}</div>
+                        </div>    
+                        <div class="padding">
+                            <div class="uk-card">${data.duration} minutos</div>
+                        </div>
+                        <div class="padding">
+                            <div class="uk-card">${data.startTime}</div>
+                        </div>
+                        <div class="padding">
+                            <div class="uk-card">status</div>
+                        </div>
+                    </div>
                 </div>
             `;
-            historicoContainer.appendChild(historyItem);
         });
     };
 

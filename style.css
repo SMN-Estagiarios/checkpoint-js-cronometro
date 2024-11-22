@@ -118,4 +118,8 @@ body {
 .body-tabela-resultados {
     background-color: #29292e;
     color: #c4c4cc;
+    
+    & div {
+        margin-block: 10px;
+    }
 }
