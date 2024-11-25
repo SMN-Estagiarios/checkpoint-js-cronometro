@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const numeroSegundos1 = document.querySelectorAll('.numero-timer')[2];
     const numeroSegundos2 = document.querySelectorAll('.numero-timer')[3];
     const botaoIniciarFinalizar = document.querySelector('.iniciar-timer');
-    const botaoImagem = document.getElementById('botaoImagem');
     const campoNome = document.getElementById('texto-projeto');
     const campoTempo = document.getElementById('tempo-projeto');  
     let segundos = 0;
@@ -27,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             timerImagem.src = "./assets/timerdesativado.svg";
             containerTimer.style.display = "none";
             containerHistorico.style.display = "block";
+            exibirTarefas();
         });
 
         timerLink.addEventListener('click', function() {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const containerLista = document.querySelector('.container-lista');    
         containerLista.innerHTML = '';
         tarefas.forEach(tarefa => {
-            if (tarefa === null || tarefa === undefined) {
+            if (!tarefa) {
                 console.error('Tarefa nula ou indefinida.');
                 return;
             }
@@ -189,18 +189,20 @@ document.addEventListener('DOMContentLoaded', function() {
             numeroSegundos2.textContent = segundosFormatado[1];
             localStorage.setItem('segundos', segundos);
         }, 1000);
-        salvarTarefa();
-        botaoIniciarFinalizar.innerHTML = `<img src="assets/mao.svg" alt="stop"><span class="uk-margin-small-left">Parar</span>`;
-        botaoIniciarFinalizar.style.backgroundColor = 'red';
-        botaoIniciarFinalizar.style.color = 'white';        
-        cronometroAtivo = true;
+        if(!cronometroAtivo){
+            salvarTarefa();
+        }
+            botaoIniciarFinalizar.innerHTML = `<img src="assets/mao.svg" alt="stop"><span class="uk-margin-small-left">Parar</span>`;
+            botaoIniciarFinalizar.style.backgroundColor = 'red';
+            botaoIniciarFinalizar.style.color = 'white';        
+            cronometroAtivo = true;
     };
     
     function pararCronometro() {
         clearInterval(timer);
         cronometroAtivo = false;    
         let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
-        let tarefa = tarefas.find(tarefa => tarefa.id === tarefaAtualId);
+        let tarefa = tarefas.find(tarefa => tarefa.status === 'Em andamento');
         if (tarefa) {
             const tempoConfigurado = parseInt(tarefa.tempo) * 60;
             let statusTarefa = 'Finalizado';
@@ -224,13 +226,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     botaoIniciarFinalizar.addEventListener('click', function() {
         if (cronometroAtivo) {
-            campoNome.value = '';
-            campoTempo.value = '';
             campoNome.disabled = false;            
             campoTempo.disabled = false;
             pararCronometro();
+            atualizarCronometro();
         } else {
-            if (!campoNome.value || !campoTempo.value) {
+            if ((!campoNome.value || !campoTempo.value) && !cronometroAtivo ) {
                 alert('Por favor, preencha os campos de nome e tempo antes de iniciar o cronômetro.');
                 return;
             }
@@ -240,14 +241,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    if (localStorage.getItem('segundos')) {
-        segundos = parseInt(localStorage.getItem('segundos'));
-        atualizarCronometro();
-        iniciaRelogio();
-    } else {
-        segundos = 0;
-        atualizarCronometro();
+    if (localStorage.getItem('segundos') && !cronometroAtivo) {
+        const respostaUsuario = window.confirm('deseja reiniciar o cronometro')
+         let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+        if(respostaUsuario){
+                pararCronometro();
+                segundos = 0;
+                atualizarCronometro(); 
+        }
+        else{
+            segundos = parseInt(localStorage.getItem('segundos'));
+            atualizarCronometro();
+            cronometroAtivo = true;
+            campoNome.value = tarefas.reverse()[0].nome
+            campoTempo.value = tarefas.reverse()[0].tempo
+            iniciaRelogio();
+        }
     } 
+
     if(cronometroAtivo) {
         campoNome.disabled = true;
         campoTempo.disabled = true;    
@@ -265,11 +276,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    window.addEventListener("beforeunload", function(event) {
-        event.preventDefault();
-        event.returnValue = "";
-    });
-
     atualizarCronometro();
-    exibirTarefas();
 });
