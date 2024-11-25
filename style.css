@@ -1,0 +1,115 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+
+:root {
+    --verde-500: #00875F;
+    --verde-600: #015F43;
+    --vermelho-500: #AB222E;
+    --vermelho-600: #7A1921;
+}
+
+html, body {
+    background-color: #202024;
+    height: 100%;
+    }
+
+.formulario-task p {
+    color: #E1E1E6;
+    font-size: 1.9vw;
+}
+
+.formulario-task input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid;
+
+    &::placeholder {
+        font-size: 1.2vw;
+    }
+
+    &:focus {
+        background-color: transparent;
+        border-color: #E1E1E6;
+    }
+}
+
+.formulario-task span {
+    color: #E1E1E6;
+}
+
+#input_nome_task {
+    width: 20vw;
+}
+
+#input_previsao_tempo_task {
+    width: 80px;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.temporizador > span {
+    font-size: clamp(16vw, 160px, 22vw);
+}
+
+.temporizador-numero {
+    background-color: #29292E;
+    font-family: 'Roboto Mono';
+
+}
+
+.temporizador-divisoria {
+    color: var(--verde-500);
+}
+
+.temporizador-botao {
+    background-color: var(--verde-500);
+    color: #fff;
+    gap: 8px;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: var(--verde-600);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.temporizador-botao-ativo {
+    background-color: var(--vermelho-500);
+
+    &:hover {
+        background-color: var(--vermelho-600);
+    }
+}
+
+.container-historico {
+    width: 80%;
+}
+
+.container-historico-titulo {
+    color: #E1E1E6;
+}
+
+.container-historico-tabela-cabecalho {
+    color: #E1E1E6;
+    background-color: #323238;
+    border-radius: 8px 8px 0 0;
+}
+
+.container-historico-tabela-linha {
+    background-color: #29292E;
+    color: #C4C4CC;
+}
+
+.container-historico-tabela-linha-status {
+    gap: 4px;
+}
+
+.container-historico-tabela-linha-status span {
+    font-size: 24px;
+}
