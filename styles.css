@@ -47,9 +47,15 @@ body {
           min-width: 4.17vw;
 
           & input {
-            width: 1.04vw;
+            width: 1.55vw;
           }
         }
+      }
+
+      & #validacao-input-duracao {
+        display: none;
+        color: #FF0000;
+        font-size: .73vw;
       }
 
       & .container-temporizador {

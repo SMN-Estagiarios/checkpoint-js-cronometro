@@ -4,6 +4,7 @@ const botaoTemporizadorComecar = document.getElementById("botao-temporizador-com
 const botaoTemporizadorInterromper = document.getElementById("botao-temporizador-interromper");
 const botaoIncremento = document.getElementById("botao-incremento");
 const botaoDecremento = document.getElementById("botao-decremento");
+const textoValidacao = document.getElementById("validacao-input-duracao");
 const listaDeTarefas = document.getElementById("lista-de-tarefas");
 const abaTemporizador = document.getElementById("link-temporizador");
 const abaHistorico = document.getElementById("link-historico");
@@ -25,6 +26,14 @@ function verificarInputs() {
         return true;
     }
     return false;
+}
+
+function validarInputDuracao() {
+    if (inputDuracaoTarefa.value >= 100 || inputDuracaoTarefa.value < 0 || inputDuracaoTarefa.length > 2) {
+        textoValidacao.style.display = "block";
+    } else {
+        textoValidacao.style.display = "none";
+    }
 }
 
 function habilitarBotao() {
@@ -59,7 +68,7 @@ function iniciarTarefa() {
             minutoDecimal.innerText = inputDuracaoTarefa.value[0];
             minutoUnitario.innerText = inputDuracaoTarefa.value[1];
         } else {
-            return alert("Valor ultrapassou do limite.");
+            return
         }
 
         botaoTemporizadorComecar.style.display = "none";
@@ -277,10 +286,13 @@ function pararTempo() {
 
 inputNomeTarefa.addEventListener("input", habilitarBotao);
 inputDuracaoTarefa.addEventListener("input", habilitarBotao);
+inputDuracaoTarefa.addEventListener("input", validarInputDuracao);
 botaoIncremento.addEventListener("click", incrementarValor);
 botaoIncremento.addEventListener("click", habilitarBotao);
+botaoIncremento.addEventListener("click", validarInputDuracao);
 botaoDecremento.addEventListener("click", decrementarValor);
 botaoDecremento.addEventListener("click", habilitarBotao);
+botaoDecremento.addEventListener("click", validarInputDuracao);
 botaoTemporizadorComecar.addEventListener("click", iniciarContagem);
 botaoTemporizadorInterromper.addEventListener("click", pararTempo);
 linkIgnite.addEventListener("click", habilitarContainerRegistroTarefa);
