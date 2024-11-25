@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer - Clockyfi</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="uk-flex uk-flex-between uk-padding-large">
+        <img src="assets/images/logo.svg" alt="Logomarca">
+        <nav>
+            <ul class="uk-flex uk-flex-between uk-height-1-1 uk-flex-middle uk-list uk-grid-medium">
+                <li>
+                    <a href="/index.html">
+                        <img src="assets/images/clock.svg">
+                    </a>
+                </li>
+                <li class="uk-margin-remove">
+                    <a href="/historico.html">
+                        <img src="assets/images/scroll.svg">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="uk-text-center">
+        <form action="" class="formulario-task uk-display-inline-block">
+            <div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-1">
+                <p class="uk-margin-remove">Vou trabalhar em</p>
+                <input 
+                    type="text"
+                    class="uk-input uk-text-center"
+                    name="nome_task" 
+                    placeholder="Dê um nome para o seu projeto"
+                    id="input_nome_task"
+                    required>
+                <p>durante</p>
+                <input 
+                type="number"
+                class="uk-input uk-text-center" 
+                name="previsao_tempo_task"
+                placeholder="00"
+                id="input_previsao_tempo_task"
+                min="1"
+                max="60"
+                required>
+                <p>minutos.</p>
+            </div>
+            <h1 class="temporizador uk-width-1-1 uk-text-center">
+                <span class="temporizador-numero uk-padding-small uk-display-inline-block uk-border-rounded">0</span>
+                <span class="temporizador-numero uk-padding-small uk-display-inline-block uk-border-rounded">0</span>
+                <span class="temporizador-divisoria uk-display-inline-block">:</span>
+                <span class="temporizador-numero uk-padding-small uk-display-inline-block uk-border-rounded">0</span>
+                <span class="temporizador-numero uk-padding-small uk-display-inline-block uk-border-rounded">0</span>
+            </h1>
+            <button type="submit" class="temporizador-botao uk-button uk-margin uk-padding-small uk-width-1-1 uk-border-rounded uk-flex uk-flex-middle uk-flex-center" disabled>
+                <img id="botao-temporizador-imagem" src="assets/images/play.svg">
+                <span id="botao-temporizador-texto">Começar
+            </button>
+        </form>
+    </main>
+<script src="script.js"></script>
+</body>
+</html>
