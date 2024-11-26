@@ -20,6 +20,8 @@ body {
 
   & main {
     & #container-registrar-tarefa {
+      height: 23.44vw;
+
       & #informacoes-tarefa {
         font-weight: 700;
         font-size: .94vw;
@@ -47,13 +49,14 @@ body {
           min-width: 4.17vw;
 
           & input {
-            width: 1.55vw;
+            width: 1.59vw;
           }
         }
       }
 
       & #validacao-input-duracao {
-        display: none;
+        height: .78vw;
+        line-height: .78vw;
         color: #FF0000;
         font-size: .73vw;
       }

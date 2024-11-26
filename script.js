@@ -30,14 +30,15 @@ function verificarInputs() {
 
 function validarInputDuracao() {
     if (inputDuracaoTarefa.value >= 100 || inputDuracaoTarefa.value < 0 || inputDuracaoTarefa.length > 2) {
-        textoValidacao.style.display = "block";
+        textoValidacao.innerText = "Preencha o campo com valores de 1 a 99";
     } else {
-        textoValidacao.style.display = "none";
+        textoValidacao.innerText = "";
     }
 }
 
 function habilitarBotao() {
     if (verificarInputs()) {
+        botaoTemporizadorComecar.removeAttribute("disabled");
         botaoTemporizadorComecar.style.cursor = "pointer";
         botaoTemporizadorComecar.style.opacity = 1;
     } else {
@@ -68,7 +69,7 @@ function iniciarTarefa() {
             minutoDecimal.innerText = inputDuracaoTarefa.value[0];
             minutoUnitario.innerText = inputDuracaoTarefa.value[1];
         } else {
-            return
+            return;
         }
 
         botaoTemporizadorComecar.style.display = "none";
@@ -187,7 +188,7 @@ function listarTarefas() {
 
 function habilitarContainerRegistroTarefa() {
     if (containerRegistrarTarefa.style.display == "" || containerRegistrarTarefa.style.display == "none") {
-        containerRegistrarTarefa.style.display = "block";
+        containerRegistrarTarefa.style.display = "flex";
         containerHistorico.style.display = "none";
         abaHistorico.innerHTML = `<img src="./assets/lista-desativada.svg" alt="Icone da lista para o histórico" />`;
         abaTemporizador.innerHTML = `<img src="./assets/relogio-ativado.svg" alt="Icone do relogio" />`;
@@ -279,6 +280,7 @@ function pararTempo() {
     segundoUnitario.innerText = 0;
     inputDuracaoTarefa.value = "";
     inputNomeTarefa.value = "";
+    habilitarBotao();
 
     localStorage.setItem("tarefas", JSON.stringify(arrayTarefas));
     listarTarefas();
