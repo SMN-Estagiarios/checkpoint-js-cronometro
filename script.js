@@ -27,33 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("parametros incorretos");
             return;
         }
-
-        salvarDadosCronometro('Em andamento')
-
-        startButton.style.backgroundColor = "var(--cor-vermelha)";
-        iconButton.src = "./assets/interromper-cronometro.svg";
-        textButton.innerText = "interromper";
-        iconTemp.src = "./assets/cronometro-ativado.svg";
-
-        if (timerInterval === 0) {
+                   
+        if (!isRunning) {
+            iniciarCronometro();
             isRunning = true;
+            salvarDadosCronometro('Em andamento')
 
             timerInterval = setInterval(() => {
                 totalSeconds++;
+                console.log(isRunning)
                 updateTimerDisplay(totalSeconds);
 
                 if (totalSeconds >= timeInputInSeconds) {
                     alert(
-                        salvarDadosCronometro('finalizado')
                         `O tempo de ${projectTimer.value} minuto(s) foi atingido!`
                     );
+                    atualizarStatusDoCronometro();
                     interromperCronometro();
                 }
                 salvarEstadoCronometro();
             }, 1000);
         } else {
             pausarCronometro();
-            salvarDadosCronometro('interrompido');
+            atualizarStatusDoCronometro();
             interromperCronometro();
         }
     };
@@ -67,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             projectTimerInminutes: projectTimer.value,
             isRunning: isRunning,
         };
-        localStorage.setItem(
+        localStorage.setItem( 
             "cronometroState",
             JSON.stringify(cronometroState)
         );
@@ -91,23 +87,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            startButton.style.backgroundColor = "var(--cor-vermelha)";
-            iconButton.src = "./assets/interromper-cronometro.svg";
-            textButton.innerText = "interromper";
-            iconTemp.src = "./assets/cronometro-ativado.svg";
+            iniciarCronometro();
             updateTimerDisplay(totalSeconds);
 
-            isRunning = true;
             if (isRunning) {
+                isRunning = true;
                 timerInterval = setInterval(() => {
                     totalSeconds++;
                     updateTimerDisplay(totalSeconds);
-
                     if (totalSeconds >= timeInputInSeconds) {
                         alert(
                             `O tempo de ${projectTimer.value} minuto(s) foi atingido!`
                         );
-                        salvarDadosCronometro('finalizado')
+                        atualizarStatusDoCronometro();
                         interromperCronometro();
                     }
                     salvarEstadoCronometro();
@@ -117,34 +109,33 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const interromperCronometro = () => {
+        isRunning = false;
         salvarEstadoCronometro();
-        startButton.style.backgroundColor = "var(--cor-verde)";
-        iconButton.src = "./assets/iniciar-cronometro.svg";
-        textButton.innerText = "Começar";
-        iconTemp.src = "./assets/cronometro-desativado.svg";
-        projectName.value = "";
-        projectTimer.value = "0";
+        pausarCronometro();
 
         cards[0].textContent = "0";
         cards[1].textContent = "0";
         cards[2].textContent = "0";
         cards[3].textContent = "0";
 
-        isRunning = false;
         totalSeconds = 0;
         clearInterval(timerInterval);
+        timerInterval = 0;
     };
 
     const pausarCronometro = () => {
-        clearInterval(timerInterval);
-        timerInterval = 0;
         startButton.style.backgroundColor = "var(--cor-verde)";
         iconButton.src = "./assets/iniciar-cronometro.svg";
         textButton.innerText = "Começar";
         iconTemp.src = "./assets/cronometro-desativado.svg";
-        isRunning = false;
     };
 
+    const iniciarCronometro = () => {
+        startButton.style.backgroundColor = "var(--cor-vermelha)";
+        iconButton.src = "./assets/interromper-cronometro.svg";
+        textButton.innerText = "interromper";
+        iconTemp.src = "./assets/cronometro-ativado.svg";
+    }
     const updateTimerDisplay = (totalSeconds) => {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
@@ -158,12 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const salvarDadosCronometro = (status) => {
-
         const cronometroData = {
             projectName: projectName.value,
             duration: projectTimer.value,
             startTime: new Date().toLocaleString(),
-            result: status
+            result: status,
         };
 
         const storedData =
@@ -171,6 +161,23 @@ document.addEventListener("DOMContentLoaded", () => {
         storedData.push(cronometroData);
         localStorage.setItem("cronometroData", JSON.stringify(storedData));
     };
+
+    const atualizarStatusDoCronometro = () => {
+        const register = JSON.parse(localStorage.getItem('cronometroData')) || []
+        const lastRegister = register.find(e => e.result === "Em andamento")
+        if(lastRegister){
+            let realTime = lastRegister.duration * 60;
+            let result = '';
+            if(realTime > totalSeconds){
+                result = "Interrompido"
+            }
+            else{
+                result = "Finalizado"
+            }
+            lastRegister.result = result;
+            localStorage.setItem('cronometroData', JSON.stringify(register));
+        } 
+    }
 
     const renderizarHistorico = () => {
         const historicoContainer = document.getElementById("body-resultado");
@@ -188,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
         storedData.forEach((data) => {
             historicoContainer.innerHTML += `
                 <div class=" body-tabela-resultados">
-                    <div class="uk-child-width-1-3 uk-text-center uk-flex" uk-grid>
+                    <div class="uk-child-width-1-3 uk-text-center uk-flex">
                         <div>
                             <div class="uk-card padding">${data.projectName}</div>
                         </div>    
@@ -220,4 +227,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateTimerDisplay(totalSeconds);
 });
-
