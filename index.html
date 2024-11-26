@@ -14,7 +14,7 @@
             <a class="logo" id="ancor-logo"><img src="./assets/logo.svg" alt="logo-cronometro"></a>
             <nav class="navegacao uk-flex">
                 <a id="item-navegacao-temporizador" href="#">
-                    <img src="./assets/cronometro-desativado.svg" id="icon-temporizador" alt="icone navegação timer">
+                    <img src="./assets/cronometro-ativado.svg" id="icon-temporizador" alt="icone navegação timer">
                 </a>
                 <a id="item-navegacao-historico">
                     <img src="./assets/historico.svg" id="historico" alt=" icone navegação histórico">
@@ -26,24 +26,18 @@
                 <p class="uk-text uk-margin-large">
                     vou trabalhar em
                     <input class="input-nome-projeto uk-text-center" type="text"
-                        placeholder="Dê um nome para o seu projeto" id="nome-projeto"> durante
+                        placeholder="Dê um nome para o seu projeto" id="nome-projeto">
+                        durante
                     <input class="input-tempo-projeto uk-text-center" type="number" placeholder="- 00 +"
-                        id="tempo-projeto"> minutos
+                        id="tempo-projeto">
+                        minutos
                 </p>
                 <div class="container-numero-cronometro uk-container uk-width-1-1 uk-flex uk-flex-center uk-text-bold">
-                    <span class="card uk-card  uk-border-rounded">
-                        0
-                    </span>
-                    <span class="card uk-card  uk-border-rounded">
-                        0
-                    </span>
+                    <span class="card uk-card  uk-border-rounded">0</span>
+                    <span class="card uk-card  uk-border-rounded">0</span>
                     <span class="card-dois-pontos">:</span>
-                    <span class="card uk-card  uk-border-rounded">
-                        0
-                    </span>
-                    <span class="card uk-card  uk-border-rounded uk-box-shadow-small">
-                        0
-                    </span>
+                    <span class="card uk-card  uk-border-rounded">0</span>
+                    <span class="card uk-card  uk-border-rounded uk-box-shadow-small">0</span>
                 </div>
                 <div
                     class="botao-cronometro uk-width-1-1 uk-flex uk-flex-center uk-margin uk-padding-small uk-padding-remove-horizontal">
@@ -72,6 +66,7 @@
                 <div id="body-resultado" class="uk-grid-collapse uk-border-rounded" uk-grid></div>
             </div>
         </main>
-        <script src="./script.js"></script>
+    </div>
+    <script src="./script.js"></script>
 </body>
 </html>
